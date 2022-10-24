@@ -10,6 +10,7 @@ import { DepartmentsService } from 'src/app/services/departments.service';
 })
 export class DepartmentsComponent implements OnInit {
   departments: Department[];
+
   constructor(
     private departmentsService: DepartmentsService,
     private router: Router
@@ -17,6 +18,9 @@ export class DepartmentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.departments = this.departmentsService.departments;
+    this.departmentsService.getDepartments().subscribe((departments) => {
+      this.departments = departments;
+    });
   }
 
   goToDepartment(departmentId: string): void {
